@@ -1,0 +1,45 @@
+name: travel_app
+description: "A Klook-style Flutter travel app UI clone."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 📸 Slider hiển thị banner nhiều ảnh
+  carousel_slider: ^5.0.0
+
+  # 🌐 Gọi API thật từ Internet
+  http: ^1.2.0
+
+  # 🍎 Icon bộ Cupertino (iOS)
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  # 🖼️ Ảnh cục bộ (nếu dùng)
+  assets:
+    - assets/banner.jpg
+    - assets/tour1.jpg
+    - assets/tour2.jpg
+
+  # 🅰️ Font chữ Roboto
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Medium.ttf
+          weight: 500
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
