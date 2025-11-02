@@ -1,32 +1,8 @@
 import 'package:flutter/material.dart';
+import '../widgets/base_page_scaffold.dart';
 
-class XeKhachPage extends StatefulWidget {
-  const XeKhachPage({super.key});
-
-  @override
-  State<XeKhachPage> createState() => _XeKhachPageState();
-}
-
-class _XeKhachPageState extends State<XeKhachPage> {
-  int _selectedIndex = 0; // BottomNavigationBar index
-
-  void _onItemTapped(int index) {
-    setState(() => _selectedIndex = index);
-    switch (index) {
-      case 0:
-        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-        break;
-      case 1:
-        Navigator.pushNamed(context, '/danhmuc');
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/donhang');
-        break;
-      case 3:
-        Navigator.pushNamed(context, '/taikhoan');
-        break;
-    }
-  }
+class XeKhachPage extends StatelessWidget {
+  XeKhachPage({super.key});
 
   final List<Map<String, dynamic>> busOptions = [
     {
@@ -63,7 +39,7 @@ class _XeKhachPageState extends State<XeKhachPage> {
     },
     {
       'name': 'Xe khách E',
-      'route': 'Hà Nội  Thái Bình',
+      'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
       'image':
@@ -129,120 +105,108 @@ class _XeKhachPageState extends State<XeKhachPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFFFAFA),
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: const Text(
-          'Xe khách',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(15),
-        itemCount: busOptions.length,
-        itemBuilder: (context, index) {
-          final bus = busOptions[index];
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+    return BasePageScaffold(
+      title: 'Xe khách',
+      currentIndex: 1,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Text(
+              'Các chuyến xe đề xuất',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            elevation: 3,
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    bottomLeft: Radius.circular(15),
-                  ),
-                  child: Image.network(
-                    bus['image'],
-                    width: 130,
-                    height: 110,
-                    fit: BoxFit.cover,
-                  ),
+          ),
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: busOptions.length,
+            itemBuilder: (context, index) {
+              final bus = busOptions[index];
+              return Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          bus['name'],
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text('Tuyến: ${bus['route']}'),
-                        const SizedBox(height: 5),
-                        Row(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                elevation: 3,
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                      ),
+                      child: Image.network(
+                        bus['image'],
+                        width: 130,
+                        height: 110,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.orange.shade400,
-                              size: 16,
+                            Text(
+                              bus['name'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
-                            const SizedBox(width: 3),
-                            Text('${bus['rating']}'),
+                            const SizedBox(height: 5),
+                            Text('Tuyến: ${bus['route']}'),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.orange.shade400,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: 3),
+                                Text('${bus['rating']}'),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Giá: ${bus['price']}',
+                              style: const TextStyle(
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.orange,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 4,
+                                  ),
+                                  minimumSize: Size.zero,
+                                ),
+                                child: const Text('Xem chi tiết'),
+                              ),
+                            ),
                           ],
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Giá: ${bus['price']}',
-                          style: const TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 4,
-                              ),
-                              minimumSize: Size.zero,
-                            ),
-                            child: const Text('Xem chi tiết'),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Khám phá'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Danh mục',
+              );
+            },
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long),
-            label: 'Đơn hàng',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Tài khoản'),
         ],
       ),
+      showHotPlaces: false,
     );
   }
 }

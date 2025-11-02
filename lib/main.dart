@@ -223,14 +223,7 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: buildCategoryIcon(Icons.directions_car, 'Di chuyển'),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(
-                      context,
-                    ).push(MaterialPageRoute(builder: (_) => XeKhachPage()));
-                  },
-                  child: buildCategoryIcon(Icons.airport_shuttle, 'Xe khách'),
-                ),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
@@ -240,7 +233,6 @@ class HomeScreen extends StatelessWidget {
                   child: buildCategoryIcon(Icons.hotel, 'Lưu trú & nghỉ dưỡng'),
                 ),
 
-                buildCategoryIcon(Icons.place, 'Các điểm tham quan'),
                 buildCategoryIcon(Icons.tour, 'Tour'),
               ],
             ),
