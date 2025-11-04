@@ -7,6 +7,7 @@ import 'screens/dichuyen_page.dart';
 import 'screens/xekhach_page.dart';
 import 'screens/chuyen_bay_page.dart';
 import 'screens/luu_tru_page.dart';
+import 'screens/tauthuy_page.dart'; // thêm import tàu thủy
 
 void main() {
   runApp(TravelApp());
@@ -27,6 +28,7 @@ class TravelApp extends StatelessWidget {
         '/dichuyen': (context) => DiChuyenPage(), // bỏ const
         '/xekhach': (context) => XeKhachPage(), // bỏ const
         '/chuyenbay': (context) => ChuyenBayPage(), // bỏ const
+        '/tauthuy': (context) => TauThuyPage(), // thêm route tàu thủy
       },
     );
   }
