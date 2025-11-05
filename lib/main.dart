@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
-// 🔸 Import các trang con
 import 'screens/thamquan_page.dart';
 import 'screens/dichuyen_page.dart';
 import 'screens/xekhach_page.dart';
 import 'screens/chuyen_bay_page.dart';
 import 'screens/luu_tru_page.dart';
-import 'screens/tauthuy_page.dart'; // thêm import tàu thủy
+import 'screens/tauthuy_page.dart';
+import 'screens/tour_page.dart';
 
 void main() {
   runApp(TravelApp());
@@ -21,14 +20,13 @@ class TravelApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.orange, fontFamily: 'Roboto'),
       home: HomeScreen(),
       debugShowCheckedModeBanner: false,
-
-      // 🔸 Thêm routes để điều hướng dễ dàng hơn
       routes: {
         '/home': (context) => HomeScreen(),
-        '/dichuyen': (context) => DiChuyenPage(), // bỏ const
-        '/xekhach': (context) => XeKhachPage(), // bỏ const
-        '/chuyenbay': (context) => ChuyenBayPage(), // bỏ const
-        '/tauthuy': (context) => TauThuyPage(), // thêm route tàu thủy
+        '/dichuyen': (context) => DiChuyenPage(),
+        '/xekhach': (context) => XeKhachPage(),
+        '/chuyenbay': (context) => ChuyenBayPage(),
+        '/tauthuy': (context) => TauThuyPage(),
+        '/tour': (context) => const TourPage(),
       },
     );
   }
@@ -48,50 +46,43 @@ class HomeScreen extends StatelessWidget {
     final List<Map<String, dynamic>> hotPlaces = [
       {
         'name': 'Phú Quốc',
-        'image':
-            'https://tse2.mm.bing.net/th/id/OIP.T_Mtex10QU9Dvr-4HqnmwwHaFj?pid=Api&P=0&h=220',
+        'image': 'https://tse2.mm.bing.net/th/id/OIP.T_Mtex10QU9Dvr-4HqnmwwHaFj?pid=Api&P=0&h=220',
         'price': '1.200.000đ',
         'rating': 4.8,
       },
       {
         'name': 'Đà Lạt',
-        'image':
-            'https://tse1.mm.bing.net/th/id/OIP.K_GeZEn0BucG7aW0R2H3fgHaE7?pid=Api&P=0&h=220',
+        'image': 'https://tse1.mm.bing.net/th/id/OIP.K_GeZEn0BucG7aW0R2H3fgHaE7?pid=Api&P=0&h=220',
         'price': '950.000đ',
         'rating': 4.6,
       },
       {
         'name': 'Hạ Long',
-        'image':
-            'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?auto=format&fit=crop&w=800&q=80',
+        'image': 'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?auto=format&fit=crop&w=800&q=80',
         'price': '1.500.000đ',
         'rating': 4.9,
       },
       {
         'name': 'Hội An',
-        'image':
-            'https://tse3.mm.bing.net/th/id/OIP.dzA_Yfyig-awC61M2d4-gAHaEo?pid=Api&P=0&h=220',
+        'image': 'https://tse3.mm.bing.net/th/id/OIP.dzA_Yfyig-awC61M2d4-gAHaEo?pid=Api&P=0&h=220',
         'price': '1.000.000đ',
         'rating': 4.7,
       },
       {
         'name': 'Sapa',
-        'image':
-            'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800&q=80',
+        'image': 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800&q=80',
         'price': '1.300.000đ',
         'rating': 4.5,
       },
       {
         'name': 'Ninh Bình',
-        'image':
-            'https://tse3.mm.bing.net/th/id/OIP.exvYmYNk5tYHPkts9PPrZgHaEK?pid=Api&P=0&h=220',
+        'image': 'https://tse3.mm.bing.net/th/id/OIP.exvYmYNk5tYHPkts9PPrZgHaEK?pid=Api&P=0&h=220',
         'price': '850.000đ',
         'rating': 4.4,
       },
       {
         'name': 'Văn HưngNA (check clone)',
-        'image':
-            'https://tse3.mm.bing.net/th/id/OIP.exvYmYNk5tYHPkts9PPrZgHaEK?pid=Api&P=0&h=220',
+        'image': 'https://tse3.mm.bing.net/th/id/OIP.exvYmYNk5tYHPkts9PPrZgHaEK?pid=Api&P=0&h=220',
         'price': '850.000đ',
         'rating': 4.4,
       },
@@ -155,8 +146,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-
-            // 🧭 Banner
             CarouselSlider(
               items: bannerImages.map((url) {
                 return ClipRRect(
@@ -195,10 +184,7 @@ class HomeScreen extends StatelessWidget {
                 autoPlayInterval: const Duration(seconds: 4),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // 🧩 Danh mục
             GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -208,45 +194,36 @@ class HomeScreen extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(
-                      context,
-                    ).push(MaterialPageRoute(builder: (_) => ThamQuanPage()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => ThamQuanPage()));
                   },
-                  child: buildCategoryIcon(
-                    Icons.airplanemode_active,
-                    'Tham quan & giải trí',
-                  ),
+                  child: buildCategoryIcon(Icons.airplanemode_active, 'Tham quan & giải trí'),
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(
-                      context,
-                    ).push(MaterialPageRoute(builder: (_) => DiChuyenPage()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => DiChuyenPage()));
                   },
                   child: buildCategoryIcon(Icons.directions_car, 'Di chuyển'),
                 ),
-
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const LuuTruPage()),
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LuuTruPage()));
                   },
                   child: buildCategoryIcon(Icons.hotel, 'Lưu trú & nghỉ dưỡng'),
                 ),
-
-                buildCategoryIcon(Icons.tour, 'Tour'),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const TourPage()));
+                  },
+                  child: buildCategoryIcon(Icons.tour, 'Tour'),
+                ),
               ],
             ),
-
             const SizedBox(height: 25),
-
             const Text(
               'Dịch vụ được yêu thích',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const SizedBox(height: 10),
-
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -291,7 +268,7 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.star,
-                                    color: Colors.orange.shade400,
+                                    color: Colors.orange,
                                     size: 16,
                                   ),
                                   const SizedBox(width: 3),
@@ -334,8 +311,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-
-      // 🔸 Bottom nav
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         selectedItemColor: Colors.orange,
@@ -344,11 +319,7 @@ class HomeScreen extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Khám phá'),
           BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Điểm đến'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view),
-            label: 'Danh mục',
-          ),
-
+          BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'Danh mục'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Tài khoản'),
         ],
       ),
