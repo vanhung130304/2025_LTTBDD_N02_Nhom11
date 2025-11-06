@@ -8,6 +8,7 @@ import 'screens/luu_tru_page.dart';
 import 'screens/tauthuy_page.dart';
 import 'screens/tour_page.dart';
 import 'auth/profile_page.dart';
+import 'screens/place_detail_page.dart'; 
 
 void main() {
   runApp(TravelApp());
@@ -28,7 +29,7 @@ class TravelApp extends StatelessWidget {
         '/chuyenbay': (context) => ChuyenBayPage(),
         '/tauthuy': (context) => TauThuyPage(),
         '/tour': (context) => const TourPage(),
-        '/taikhoan': (context) => ProfilePage(), // <-- sửa ở đây: bỏ `const`
+        '/taikhoan': (context) => ProfilePage(),
       },
     );
   }
@@ -68,36 +69,48 @@ class _HomeScreenState extends State<HomeScreen> {
         'image': 'https://tse2.mm.bing.net/th/id/OIP.T_Mtex10QU9Dvr-4HqnmwwHaFj?pid=Api&P=0&h=220',
         'price': '1.200.000đ',
         'rating': 4.8,
+        'description':
+            'Phú Quốc – hòn đảo ngọc tuyệt đẹp của Việt Nam, nổi tiếng với những bãi biển hoang sơ, hải sản tươi ngon và các khu nghỉ dưỡng sang trọng.',
       },
       {
         'name': 'Đà Lạt',
         'image': 'https://tse1.mm.bing.net/th/id/OIP.K_GeZEn0BucG7aW0R2H3fgHaE7?pid=Api&P=0&h=220',
         'price': '950.000đ',
         'rating': 4.6,
+        'description':
+            'Đà Lạt – thành phố ngàn hoa, có khí hậu mát mẻ quanh năm, nổi tiếng với cảnh quan thơ mộng và những điểm du lịch hấp dẫn.',
       },
       {
         'name': 'Hạ Long',
         'image': 'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?auto=format&fit=crop&w=800&q=80',
         'price': '1.500.000đ',
         'rating': 4.9,
+        'description':
+            'Vịnh Hạ Long – di sản thiên nhiên thế giới, nổi bật với hàng nghìn hòn đảo đá vôi và cảnh quan ngoạn mục.',
       },
       {
         'name': 'Hội An',
         'image': 'https://tse3.mm.bing.net/th/id/OIP.dzA_Yfyig-awC61M2d4-gAHaEo?pid=Api&P=0&h=220',
         'price': '1.000.000đ',
         'rating': 4.7,
+        'description':
+            'Phố cổ Hội An – nơi lưu giữ vẻ đẹp cổ kính, yên bình, cùng với những con đường đèn lồng rực rỡ và ẩm thực phong phú.',
       },
       {
         'name': 'Sapa',
         'image': 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800&q=80',
         'price': '1.300.000đ',
         'rating': 4.5,
+        'description':
+            'Sapa – vùng núi phía Bắc Việt Nam, nổi tiếng với ruộng bậc thang hùng vĩ, khí hậu mát lạnh và văn hóa đa dạng.',
       },
       {
         'name': 'Ninh Bình',
         'image': 'https://tse3.mm.bing.net/th/id/OIP.exvYmYNk5tYHPkts9PPrZgHaEK?pid=Api&P=0&h=220',
         'price': '850.000đ',
         'rating': 4.4,
+        'description':
+            'Ninh Bình – nơi giao thoa giữa thiên nhiên và văn hóa, nổi bật với Tràng An, Tam Cốc, và chùa Bái Đính.',
       },
     ];
 
@@ -223,67 +236,76 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             const SizedBox(height: 10),
             ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: hotPlaces.length,
-              itemBuilder: (context, index) {
-                final place = hotPlaces[index];
-                return Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  elevation: 3,
-                  child: Row(
+  physics: const NeverScrollableScrollPhysics(),
+  shrinkWrap: true,
+  itemCount: hotPlaces.length,
+  itemBuilder: (context, index) {
+    final place = hotPlaces[index];
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      elevation: 3,
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(15),
+              bottomLeft: Radius.circular(15),
+            ),
+            child: Image.network(place['image'], width: 130, height: 110, fit: BoxFit.cover),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(place['name'],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 5),
+                  Row(
                     children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          bottomLeft: Radius.circular(15),
-                        ),
-                        child: Image.network(place['image'], width: 130, height: 110, fit: BoxFit.cover),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(place['name'],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 16)),
-                              const SizedBox(height: 5),
-                              Row(
-                                children: [
-                                  Icon(Icons.star, color: Colors.orange, size: 16),
-                                  const SizedBox(width: 3),
-                                  Text('${place['rating']}'),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Text('Giá: ${place['price']}',
-                                  style: const TextStyle(
-                                      color: Colors.redAccent, fontWeight: FontWeight.bold)),
-                              const SizedBox(height: 8),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.orange,
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                    minimumSize: Size.zero,
-                                  ),
-                                  child: const Text('Xem chi tiết'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      Icon(Icons.star, color: Colors.orange, size: 16),
+                      const SizedBox(width: 3),
+                      Text('${place['rating']}'),
                     ],
                   ),
-                );
-              },
+                  const SizedBox(height: 8),
+                  Text('Giá: ${place['price']}',
+                      style: const TextStyle(
+                          color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // ✅ Nút này sẽ mở trang chi tiết riêng của địa điểm
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => PlaceDetailPage(place: place),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        minimumSize: Size.zero,
+                      ),
+                      child: const Text('Xem chi tiết'),
+                    ),
+                  ),
+                ],
+              ),
             ),
+          ),
+        ],
+      ),
+    );
+  },
+),
+
           ],
         ),
       ),

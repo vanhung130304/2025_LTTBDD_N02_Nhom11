@@ -20,7 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _loadUser() async {
     final user = await AuthService.getUser();
-setState(() => _user = user.map((k, v) => MapEntry(k, v ?? '')));
+    setState(() => _user = user.map((k, v) => MapEntry(k, v ?? '')));
   }
 
   Future<void> _logout() async {
@@ -90,6 +90,33 @@ setState(() => _user = user.map((k, v) => MapEntry(k, v ?? '')));
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 3,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/danhmuc');
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/donhang');
+              break;
+            case 3:
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Khám phá'),
+          BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Điểm đến'),
+          BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'Danh mục'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Tài khoản'),
+        ],
       ),
     );
   }
