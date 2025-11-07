@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'login_page.dart';
 
+// SỬA LỖI ĐƯỜNG DẪN: Sử dụng '../screens/' để trỏ đến các tệp trong thư mục 'screens'
+import '../screens/group_profile_page.dart'; 
+import '../screens/settings_page.dart';
+import '../screens/support_center_page.dart';
+import '../screens/privacy_policy_page.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -31,6 +37,14 @@ class _ProfilePageState extends State<ProfilePage> {
         MaterialPageRoute(builder: (_) => const LoginPage()),
       );
     }
+  }
+
+  // Hàm tiện ích để điều hướng đến một trang mới
+  void _navigateTo(Widget page) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
   }
 
   @override
@@ -71,10 +85,35 @@ class _ProfilePageState extends State<ProfilePage> {
               style: const TextStyle(color: Colors.grey),
             ),
             const SizedBox(height: 25),
-            _buildMenuItem(Icons.history, "Profile Nhóm 8 "),
-            _buildMenuItem(Icons.settings, "Cài đặt tài khoản"),
-            _buildMenuItem(Icons.support_agent, "Trung tâm hỗ trợ"),
-            _buildMenuItem(Icons.privacy_tip, "Chính sách & quyền riêng tư"),
+            
+            // 1. Profile Nhóm 8: ĐÃ THÊM LOGIC ĐIỀU HƯỚNG
+            _buildMenuItem(
+              Icons.history, 
+              "Profile Nhóm 8 ", 
+              () => _navigateTo(const GroupProfilePage()), 
+            ),
+            
+            // 2. Cài đặt tài khoản
+            _buildMenuItem(
+              Icons.settings, 
+              "Cài đặt tài khoản", 
+              () => _navigateTo(const SettingsPage()),
+            ),
+            
+            // 3. Trung tâm hỗ trợ
+            _buildMenuItem(
+              Icons.support_agent, 
+              "Trung tâm hỗ trợ", 
+              () => _navigateTo(const SupportCenterPage()),
+            ),
+            
+            // 4. Chính sách & quyền riêng tư
+            _buildMenuItem(
+              Icons.privacy_tip, 
+              "Chính sách & quyền riêng tư", 
+              () => _navigateTo(const PrivacyPolicyPage()),
+            ),
+
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: _logout,
@@ -121,7 +160,8 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String title) {
+  // SỬA LỖI: Cập nhật hàm để nhận tham số onTap
+  Widget _buildMenuItem(IconData icon, String title, VoidCallback onTap) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -130,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: Icon(icon, color: Colors.orange),
         title: Text(title),
         trailing: const Icon(Icons.chevron_right),
-        onTap: () {},
+        onTap: onTap, // Gắn chức năng điều hướng vào đây
       ),
     );
   }
