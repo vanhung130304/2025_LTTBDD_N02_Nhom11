@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'login_page.dart';
 
-// SỬA LỖI ĐƯỜNG DẪN: Sử dụng '../screens/' để trỏ đến các tệp trong thư mục 'screens'
 import '../screens/group_profile_page.dart'; 
 import '../screens/settings_page.dart';
 import '../screens/support_center_page.dart';

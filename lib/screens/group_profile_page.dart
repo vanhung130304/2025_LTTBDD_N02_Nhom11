@@ -1,6 +1,7 @@
 // File: lib/screens/group_profile_page.dart
 
 import 'package:flutter/material.dart';
+import 'member_detail_page.dart'; 
 
 // Màn hình chính
 class GroupProfilePage extends StatelessWidget {
@@ -11,12 +12,12 @@ class GroupProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile Nhóm 8'),
-        // Đã đồng bộ màu sắc với dự án của bạn (nếu bạn dùng màu cam)
         backgroundColor: Colors.orange,
         foregroundColor: Colors.white,
-        elevation: 1, // Thêm đổ bóng nhẹ
+        elevation: 1, 
       ),
-      body: const GroupProfileBody(),
+      // Xóa 'const' ở đây nếu bạn muốn dữ liệu (như _members) thay đổi
+      body: const GroupProfileBody(), 
     );
   }
 }
@@ -25,14 +26,28 @@ class GroupProfilePage extends StatelessWidget {
 class GroupProfileBody extends StatelessWidget {
   const GroupProfileBody({super.key});
 
-  // Dữ liệu giả định về thành viên
+  // Dữ liệu giả định về thành viên (ĐÃ CẬP NHẬT THÊM THÔNG TIN CHI TIẾT)
   final List<Map<String, String>> _members = const [
     {
       'name': 'Dương Văn Hưng',
-      'mssv': '2052xxxx',
+      'mssv': '22010166',
       'role': 'Nhóm trưởng (Backend)',
+      'email': 'hungdv@mobilegk.com',
+      'phone': '0901xxxx123',
+      'address': 'Nghệ An', // THÔNG TIN MỚI
+      'dob': '13/03/2004',    // THÔNG TIN MỚI
+      'hobbies': 'Đá bóng, lập trình, chơi game', // THÔNG TIN MỚI
     },
-    {'name': 'Trần Ánh Tuyết ', 'mssv': '2052yyyy', 'role': 'Thiết kế UI/UX'},
+    {
+      'name': 'Trần Ánh Tuyết ', 
+      'mssv': '22010309', 
+      'role': 'Thiết kế UI/UX',
+      'email': 'tuyetta@mobilegk.com',
+      'phone': '0902xxxx456',
+      'address': 'Nam Định', // THÔNG TIN MỚI
+      'dob': '25/08/2004',    // THÔNG TIN MỚI
+      'hobbies': 'Đọc sách, vẽ, du lịch', // THÔNG TIN MỚI
+    },
   ];
 
   @override
@@ -41,21 +56,17 @@ class GroupProfileBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Phần 1: Thông tin chung của Nhóm
           _buildGroupInfoSection(),
-
-          // Đường kẻ phân cách
           const Divider(height: 1, thickness: 8, color: Color(0xFFF0F0F0)),
-
-          // Phần 2: Danh sách thành viên
-          _buildMemberListSection(),
+          _buildMemberListSection(context), // <--- TRUYỀN context VÀO ĐÂY
         ],
       ),
     );
   }
 
   // --- HÀM XÂY DỰNG GIAO DIỆN ---
-
+  
+  // (Các hàm _buildGroupInfoSection và _buildInfoRow được giữ nguyên)
   Widget _buildGroupInfoSection() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -66,7 +77,7 @@ class GroupProfileBody extends StatelessWidget {
           Center(
             child: CircleAvatar(
               radius: 50,
-              backgroundColor: Colors.orange, // Đồng bộ màu cam
+              backgroundColor: Colors.orange, 
               child: const Text(
                 'N8',
                 style: TextStyle(
@@ -78,7 +89,6 @@ class GroupProfileBody extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-
           // Tên Nhóm và Mô tả
           const Center(
             child: Text(
@@ -109,7 +119,7 @@ class GroupProfileBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         children: [
-          Icon(icon, size: 18, color: Colors.orange), // Đồng bộ màu cam
+          Icon(icon, size: 18, color: Colors.orange),
           const SizedBox(width: 10),
           Text('$label:', style: const TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 5),
@@ -119,17 +129,16 @@ class GroupProfileBody extends StatelessWidget {
     );
   }
 
-  // ĐÃ SỬA LỖI: Bỏ từ khóa 'const' khỏi Padding.
-  Widget _buildMemberListSection() {
+  // HÀM ĐÃ SỬA LỖI CONST và THÊM LOGIC ĐIỀU HƯỚNG
+  Widget _buildMemberListSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          // <-- ĐÃ XÓA 'const' Ở ĐÂY
+        // ĐÃ XÓA 'const' KHỎI PADDING để giải quyết lỗi biên dịch
+        Padding( 
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
           child: Text(
-            // Giờ có thể dùng giá trị động _members.length
-            'Danh sách Thành viên (${_members.length})',
+            'Danh sách Thành viên (${_members.length})', // Giá trị động không còn lỗi
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -153,8 +162,16 @@ class GroupProfileBody extends StatelessWidget {
             ),
             title: Text(member['name']!),
             subtitle: Text('${member['mssv']} - ${member['role']}'),
+            
+            // LOGIC ĐIỀU HƯỚNG VÀ TRUYỀN DỮ LIỆU
             onTap: () {
-              // Có thể thêm logic hiển thị chi tiết thành viên tại đây
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  // Chuyển sang MemberDetailPage và truyền toàn bộ Map dữ liệu member
+                  builder: (context) => MemberDetailPage(member: member), 
+                ),
+              );
             },
           );
         }).toList(),
