@@ -1,7 +1,7 @@
 // File: lib/screens/group_profile_page.dart
 
 import 'package:flutter/material.dart';
-import 'member_detail_page.dart'; // <--- BƯỚC 1: IMPORT TRANG CHI TIẾT
+import 'member_detail_page.dart'; 
 
 // Màn hình chính
 class GroupProfilePage extends StatelessWidget {
