@@ -42,7 +42,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get explore => 'Khám phá';
 
   @override
-  String get destination => 'Điểm đến';
+  String get destination => 'Review';
 
   @override
   String get category => 'Danh mục';

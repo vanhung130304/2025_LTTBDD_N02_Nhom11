@@ -49,4 +49,10 @@ class SVi extends S {
 
   @override
   String get account => 'Tài khoản';
+
+  @override
+  String get review => 'Đánh giá';
+
+  @override
+  String get thamQuan => 'Tham quan';
 }

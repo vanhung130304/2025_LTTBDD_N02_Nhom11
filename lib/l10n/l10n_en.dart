@@ -49,4 +49,10 @@ class SEn extends S {
 
   @override
   String get account => 'Account';
+
+  @override
+  String get review => 'Review';
+
+  @override
+  String get thamQuan => 'Sightseeing';
 }

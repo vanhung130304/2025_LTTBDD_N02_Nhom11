@@ -23,26 +23,22 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Account"),
-    "busTitle": MessageLookupByLibrary.simpleMessage("Bus"),
     "category": MessageLookupByLibrary.simpleMessage("Category"),
     "destination": MessageLookupByLibrary.simpleMessage("Destination"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
-    "discover": MessageLookupByLibrary.simpleMessage("Discover new places"),
+    "discover": MessageLookupByLibrary.simpleMessage("Discover"),
     "explore": MessageLookupByLibrary.simpleMessage("Explore"),
     "hotel": MessageLookupByLibrary.simpleMessage("Hotel"),
     "newest": MessageLookupByLibrary.simpleMessage("Newest"),
-    "popular": MessageLookupByLibrary.simpleMessage("Popular services"),
+    "popular": MessageLookupByLibrary.simpleMessage("Popular"),
     "price": MessageLookupByLibrary.simpleMessage("Price"),
-    "recommendedBuses": MessageLookupByLibrary.simpleMessage(
-      "Recommended bus routes",
-    ),
-    "route": MessageLookupByLibrary.simpleMessage("Route"),
+    "review": MessageLookupByLibrary.simpleMessage("Review"),
     "searchHint": MessageLookupByLibrary.simpleMessage(
-      "Search destinations or activities",
+      "Search destinations...",
     ),
+    "thamQuan": MessageLookupByLibrary.simpleMessage("Sightseeing"),
     "tour": MessageLookupByLibrary.simpleMessage("Tour"),
     "transport": MessageLookupByLibrary.simpleMessage("Transport"),
     "updateLocation": MessageLookupByLibrary.simpleMessage("Update location"),
-    "viewDetails": MessageLookupByLibrary.simpleMessage("View details"),
   };
 }

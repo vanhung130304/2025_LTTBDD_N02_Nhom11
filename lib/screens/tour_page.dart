@@ -19,7 +19,8 @@ class _TourPageState extends State<TourPage> {
       'price': '2.500.000đ',
       'rating': 4.7,
       'image':
-          'https://tse4.mm.bing.net/th/id/OIP.Mtj1KMU4uQSE4ONrOgnFxgHaDo?pid=Api&P=0&h=180',
+      'https://tse2.mm.bing.net/th/id/OIP.jQ1teKISIftBRL_Vww3lVgHaFj?pid=Api&P=0&h=180',
+
       'departureDate': '15/11/2025',
       'transport': 'Xe khách',
     },
@@ -30,7 +31,7 @@ class _TourPageState extends State<TourPage> {
       'price': '3.200.000đ',
       'rating': 4.8,
       'image':
-          'https://tse2.mm.bing.net/th/id/OIP.Ppa6tfYFUypjt2HB75JlFQHaDy?pid=Api&P=0&h=180',
+          'https://tse1.mm.bing.net/th/id/OIP.6V4YH0fqjD-eyDXFGXo0eQHaDt?pid=Api&P=0&h=180',
       'departureDate': '20/11/2025',
       'transport': 'Máy bay',
     },

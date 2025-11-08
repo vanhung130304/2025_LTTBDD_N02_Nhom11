@@ -182,6 +182,18 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Account'**
   String get account;
+
+  /// No description provided for @review.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get review;
+
+  /// No description provided for @thamQuan.
+  ///
+  /// In en, this message translates to:
+  /// **'Sightseeing'**
+  String get thamQuan;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

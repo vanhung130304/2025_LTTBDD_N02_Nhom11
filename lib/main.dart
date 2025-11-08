@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const ReviewPage()),
+          MaterialPageRoute(builder: (_) => ReviewPage()),
         );
         break;
       case 2:
@@ -306,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ThamQuanPage())),
-                  child: buildCategoryIcon(Icons.airplanemode_active, S.of(context).tour),
+                  child: buildCategoryIcon(Icons.airplanemode_active, S.of(context).thamQuan),
                 ),
                 GestureDetector(
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => DiChuyenPage())),

@@ -23,26 +23,20 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
-    "busTitle": MessageLookupByLibrary.simpleMessage("Xe khách"),
     "category": MessageLookupByLibrary.simpleMessage("Danh mục"),
     "destination": MessageLookupByLibrary.simpleMessage("Điểm đến"),
-    "details": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
-    "discover": MessageLookupByLibrary.simpleMessage("Khám phá địa điểm mới"),
+    "details": MessageLookupByLibrary.simpleMessage("Chi tiết"),
+    "discover": MessageLookupByLibrary.simpleMessage("Khám phá"),
     "explore": MessageLookupByLibrary.simpleMessage("Khám phá"),
-    "hotel": MessageLookupByLibrary.simpleMessage("Lưu trú & nghỉ dưỡng"),
-    "newest": MessageLookupByLibrary.simpleMessage("Mới"),
-    "popular": MessageLookupByLibrary.simpleMessage("Dịch vụ được yêu thích"),
+    "hotel": MessageLookupByLibrary.simpleMessage("Lưu trú"),
+    "newest": MessageLookupByLibrary.simpleMessage("Mới nhất"),
+    "popular": MessageLookupByLibrary.simpleMessage("Phổ biến"),
     "price": MessageLookupByLibrary.simpleMessage("Giá"),
-    "recommendedBuses": MessageLookupByLibrary.simpleMessage(
-      "Các chuyến xe đề xuất",
-    ),
-    "route": MessageLookupByLibrary.simpleMessage("Tuyến"),
-    "searchHint": MessageLookupByLibrary.simpleMessage(
-      "Tìm theo điểm đến hoặc hoạt động",
-    ),
-    "tour": MessageLookupByLibrary.simpleMessage("Tour"),
+    "review": MessageLookupByLibrary.simpleMessage("Đánh giá"),
+    "searchHint": MessageLookupByLibrary.simpleMessage("Tìm kiếm địa điểm..."),
+    "thamQuan": MessageLookupByLibrary.simpleMessage("Tham quan"),
+    "tour": MessageLookupByLibrary.simpleMessage("Tham quan"),
     "transport": MessageLookupByLibrary.simpleMessage("Di chuyển"),
     "updateLocation": MessageLookupByLibrary.simpleMessage("Cập nhật vị trí"),
-    "viewDetails": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
   };
 }

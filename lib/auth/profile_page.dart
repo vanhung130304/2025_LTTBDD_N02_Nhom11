@@ -151,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Khám phá'),
-          BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Điểm đến'),
+          BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Review'),
           BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'Danh mục'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Tài khoản'),
         ],

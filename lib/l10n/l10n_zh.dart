@@ -49,4 +49,10 @@ class SZh extends S {
 
   @override
   String get account => '账户';
+
+  @override
+  String get review => '评论';
+
+  @override
+  String get thamQuan => '观光';
 }
