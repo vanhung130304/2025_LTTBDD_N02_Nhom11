@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
 import 'screens/thamquan_page.dart';
 import 'screens/dichuyen_page.dart';
 import 'screens/xekhach_page.dart';
@@ -8,24 +10,62 @@ import 'screens/chuyen_bay_page.dart';
 import 'screens/luu_tru_page.dart';
 import 'screens/tauthuy_page.dart';
 import 'screens/tour_page.dart';
+import 'screens/danh_muc_page.dart';
 import 'auth/profile_page.dart';
 import 'screens/place_detail_page.dart';
-import 'screens/danh_muc_page.dart';
+import 'screens/review_page.dart';
 
 void main() {
   runApp(TravelApp());
 }
 
-class TravelApp extends StatelessWidget {
+class TravelApp extends StatefulWidget {
+  @override
+  State<TravelApp> createState() => _TravelAppState();
+}
+
+class _TravelAppState extends State<TravelApp> {
+  Locale _locale = const Locale('vi');
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedLanguage();
+  }
+
+  Future<void> _loadSavedLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedLang = prefs.getString('languageCode') ?? 'vi';
+    setState(() {
+      _locale = Locale(savedLang);
+    });
+  }
+
+  void setLocale(Locale locale) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('languageCode', locale.languageCode);
+    setState(() {
+      _locale = locale;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Travel App',
       theme: ThemeData(primarySwatch: Colors.orange, fontFamily: 'Roboto'),
-      home: HomeScreen(),
+      locale: _locale,
+      supportedLocales: S.delegate.supportedLocales,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      home: HomeScreen(onLocaleChange: setLocale),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/home': (context) => HomeScreen(),
+        '/home': (context) => HomeScreen(onLocaleChange: setLocale),
         '/dichuyen': (context) => DiChuyenPage(),
         '/xekhach': (context) => XeKhachPage(),
         '/chuyenbay': (context) => ChuyenBayPage(),
@@ -38,6 +78,9 @@ class TravelApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  final Function(Locale) onLocaleChange;
+  const HomeScreen({super.key, required this.onLocaleChange});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -121,7 +164,10 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() => _selectedIndex = 0);
         break;
       case 1:
-        setState(() => _selectedIndex = 1);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const ReviewPage()),
+        );
         break;
       case 2:
         await Navigator.push(
@@ -136,6 +182,24 @@ class _HomeScreenState extends State<HomeScreen> {
         Navigator.pushNamed(context, '/taikhoan');
         break;
     }
+  }
+
+  void _changeLanguage(String langCode) {
+    Locale newLocale;
+    switch (langCode) {
+      case 'vi':
+        newLocale = const Locale('vi');
+        break;
+      case 'en':
+        newLocale = const Locale('en');
+        break;
+      case 'zh':
+        newLocale = const Locale('zh');
+        break;
+      default:
+        newLocale = const Locale('vi');
+    }
+    widget.onLocaleChange(newLocale);
   }
 
   @override
@@ -160,10 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.orange,
         title: Container(
           height: 40,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
@@ -178,13 +239,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: 'Tìm theo điểm đến hoặc hoạt động',
+                    hintText: S.of(context).searchHint,
                     border: InputBorder.none,
                     hintStyle: TextStyle(color: Colors.grey.shade600),
                   ),
                 ),
               ),
-              const Icon(Icons.shopping_cart, color: Colors.orange),
+              PopupMenuButton<String>(
+                icon: const Icon(Icons.language, color: Colors.orange),
+                onSelected: _changeLanguage,
+                itemBuilder: (context) => const [
+                  PopupMenuItem(value: 'vi', child: Text('Tiếng Việt')),
+                  PopupMenuItem(value: 'en', child: Text('English')),
+                  PopupMenuItem(value: 'zh', child: Text('中文')),
+                ],
+              ),
             ],
           ),
         ),
@@ -194,19 +263,18 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Khám phá địa điểm mới',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            Text(S.of(context).discover, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.keyboard_arrow_down, size: 20),
-                  label: const Text('Mới', style: TextStyle(color: Colors.black)),
+                  label: Text(S.of(context).newest, style: const TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('Cập nhật vị trí', style: TextStyle(color: Colors.blue)),
+                  child: Text(S.of(context).updateLocation, style: const TextStyle(color: Colors.blue)),
                 ),
               ],
             ),
@@ -238,25 +306,24 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ThamQuanPage())),
-                  child: buildCategoryIcon(Icons.airplanemode_active, 'Tham quan & giải trí'),
+                  child: buildCategoryIcon(Icons.airplanemode_active, S.of(context).tour),
                 ),
                 GestureDetector(
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => DiChuyenPage())),
-                  child: buildCategoryIcon(Icons.directions_car, 'Di chuyển'),
+                  child: buildCategoryIcon(Icons.directions_car, S.of(context).transport),
                 ),
                 GestureDetector(
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => LuuTruPage())),
-                  child: buildCategoryIcon(Icons.hotel, 'Lưu trú & nghỉ dưỡng'),
+                  child: buildCategoryIcon(Icons.hotel, S.of(context).hotel),
                 ),
                 GestureDetector(
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TourPage())),
-                  child: buildCategoryIcon(Icons.tour, 'Tour'),
+                  child: buildCategoryIcon(Icons.tour, S.of(context).tour),
                 ),
               ],
             ),
             const SizedBox(height: 25),
-            const Text('Dịch vụ được yêu thích',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            Text(S.of(context).popular, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             const SizedBox(height: 10),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -273,10 +340,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: [
                       ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
-                        child: Image.network(place['image'],
-                            width: 130, height: 110, fit: BoxFit.cover),
+                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
+                        child: Image.network(place['image'], width: 130, height: 110, fit: BoxFit.cover),
                       ),
                       Expanded(
                         child: Padding(
@@ -284,8 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(place['name'],
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                              Text(place['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                               const SizedBox(height: 5),
                               Row(
                                 children: [
@@ -295,18 +359,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              Text('Giá: ${place['price']}',
-                                  style: const TextStyle(
-                                      color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                              Text('${S.of(context).price}: ${place['price']}', style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
                               const SizedBox(height: 8),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   IconButton(
-                                    icon: Icon(
-                                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                                      color: Colors.red,
-                                    ),
+                                    icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: Colors.red),
                                     onPressed: () async {
                                       setState(() {
                                         if (isFavorite) {
@@ -321,14 +380,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ElevatedButton(
                                     onPressed: () => Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                          builder: (_) => PlaceDetailPage(place: place)),
+                                      MaterialPageRoute(builder: (_) => PlaceDetailPage(place: place)),
                                     ),
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.orange,
-                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                        minimumSize: Size.zero),
-                                    child: const Text('Xem chi tiết'),
+                                      backgroundColor: Colors.orange,
+                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                      minimumSize: Size.zero,
+                                    ),
+                                    child: Text(S.of(context).details),
                                   ),
                                 ],
                               )
@@ -350,11 +409,11 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Khám phá'),
-          BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Điểm đến'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'Danh mục'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Tài khoản'),
+        items: [
+          BottomNavigationBarItem(icon: const Icon(Icons.explore), label: S.of(context).explore),
+          BottomNavigationBarItem(icon: const Icon(Icons.rate_review), label: S.of(context).review),
+          BottomNavigationBarItem(icon: const Icon(Icons.grid_view), label: S.of(context).category),
+          BottomNavigationBarItem(icon: const Icon(Icons.person), label: S.of(context).account),
         ],
       ),
     );
@@ -364,17 +423,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(
-              color: Colors.orange.shade100, borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(color: Colors.orange.shade100, borderRadius: BorderRadius.circular(12)),
           padding: const EdgeInsets.all(12),
           child: Icon(icon, color: Colors.orange, size: 30),
         ),
         const SizedBox(height: 5),
-        Text(label,
-            style: const TextStyle(fontSize: 12),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis),
+        Text(label, style: const TextStyle(fontSize: 12), textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis),
       ],
     );
   }

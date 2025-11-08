@@ -31,7 +31,7 @@ class GroupProfileBody extends StatelessWidget {
     {
       'name': 'Dương Văn Hưng',
       'mssv': '22010166',
-      'role': 'Nhóm trưởng (Backend)',
+      'role': 'Nhóm trưởng (UI/UX?Frontend?Backend)',
       'email': 'hungdv@mobilegk.com',
       'phone': '0901xxxx123',
       'address': 'Nghệ An', // THÔNG TIN MỚI
@@ -41,7 +41,7 @@ class GroupProfileBody extends StatelessWidget {
     {
       'name': 'Trần Ánh Tuyết ', 
       'mssv': '22010309', 
-      'role': 'Thiết kế UI/UX',
+      'role': 'Thiết kế UI/UX//Báo Cáo',
       'email': 'tuyetta@mobilegk.com',
       'phone': '0902xxxx456',
       'address': 'Nam Định', // THÔNG TIN MỚI

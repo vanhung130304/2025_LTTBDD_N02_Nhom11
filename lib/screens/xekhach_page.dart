@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/base_page_scaffold.dart';
+import '../generated/l10n.dart';
 
 class XeKhachPage extends StatefulWidget {
   XeKhachPage({super.key});
@@ -15,84 +16,96 @@ class _XeKhachPageState extends State<XeKhachPage> {
       'route': 'Hà Nội - Hải Phòng',
       'price': '200.000đ',
       'rating': 4.5,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách B',
       'route': 'Hà Nội - Nam Định',
       'price': '180.000đ',
       'rating': 4.3,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách C',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách D',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách E',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách F',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách G',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách H',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách I',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách K',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách L',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
     {
       'name': 'Xe khách M',
       'route': 'Hà Nội - Thái Bình',
       'price': '150.000đ',
       'rating': 4.2,
-      'image': 'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
+      'image':
+          'https://tse3.mm.bing.net/th/id/OVP.bqSKBCRPBYn81p2haXMtZwHgFo?pid=Api&h=360&w=480&c=7&rs=1',
     },
   ];
 
@@ -121,18 +134,18 @@ class _XeKhachPageState extends State<XeKhachPage> {
   @override
   Widget build(BuildContext context) {
     return BasePageScaffold(
-      title: 'Xe khách',
+      title: S.of(context).busTitle,
       currentIndex: 1,
       onSearchChanged: _searchBus,
       showHotPlaces: false,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(
-              'Các chuyến xe đề xuất',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              S.of(context).recommendedBuses,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           ListView.builder(
@@ -175,7 +188,7 @@ class _XeKhachPageState extends State<XeKhachPage> {
                               ),
                             ),
                             const SizedBox(height: 5),
-                            Text('Tuyến: ${bus['route']}'),
+                            Text('${S.of(context).route}: ${bus['route']}'),
                             const SizedBox(height: 5),
                             Row(
                               children: [
@@ -190,7 +203,7 @@ class _XeKhachPageState extends State<XeKhachPage> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Giá: ${bus['price']}',
+                              '${S.of(context).price}: ${bus['price']}',
                               style: const TextStyle(
                                 color: Colors.redAccent,
                                 fontWeight: FontWeight.bold,
@@ -209,7 +222,7 @@ class _XeKhachPageState extends State<XeKhachPage> {
                                   ),
                                   minimumSize: Size.zero,
                                 ),
-                                child: const Text('Xem chi tiết'),
+                                child: Text(S.of(context).viewDetails),
                               ),
                             ),
                           ],

@@ -40,7 +40,7 @@ class _ThamQuanPageState extends State<ThamQuanPage> {
       // Quay lại trang HomeScreen
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen()),
+MaterialPageRoute(builder: (_) => HomeScreen(onLocaleChange: (locale) {})),
         (route) => false,
       );
     }
